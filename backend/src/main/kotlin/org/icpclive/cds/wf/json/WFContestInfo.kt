@@ -42,7 +42,7 @@ class WFContestInfo : WFContestInfo() {
         runInfo.id = wfRuns.size
         wfRuns.add(runInfo)
         teamInfos[runInfo.teamId]!!.addRun(runInfo, runInfo.problemId)
-        getProblemById(runInfo.problemId).submissions[runInfo.languageId]++
+        runInfo.languageId?.let { getProblemById(runInfo.problemId).submissions[it]++ }
     }
 
     fun getTeamByCDSId(cdsId: String): WFTeamInfo? {

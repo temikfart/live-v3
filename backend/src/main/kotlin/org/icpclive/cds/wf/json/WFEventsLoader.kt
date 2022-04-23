@@ -336,14 +336,18 @@ class WFEventsLoader(regionals: Boolean) {
         val run = WFRunInfo()
         val cdsId = je["id"].asString
         val languageInfo = contestInfo.languageById[je["language_id"].asString]
-        run.languageId = languageInfo!!.id
+        run.languageId = languageInfo?.id
         val problemId = je["problem_id"].asString
         val problemInfo = contestInfo.problemById[problemId]
             ?: contestInfo.problemById[problemId.replace("rmc21.", "")]
             ?: contestInfo.problemById[problemId.replace("rmc21.", "") + "2"]
             ?: throw IllegalStateException("Couldn't find task $problemId in contestInfo.problems");
         run.problemId = problemInfo.id
-        val teamInfo = contestInfo.teamById[je["team_id"].asString] as WFTeamInfo
+        contestInfo.teamById[je["team_id"].asString] ?: run {
+            log.warn("Not fount team with id ${je["team_id"].asString} in contest info");
+            return@readSubmission
+        }
+        val teamInfo = contestInfo.teamById[je["team_id"].asString]!! as WFTeamInfo
         run.teamId = teamInfo.id
         run.team = teamInfo
         run.time = parseRelativeTime(je["contest_time"].asString).inWholeMilliseconds

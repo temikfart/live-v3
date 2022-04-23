@@ -11,7 +11,7 @@ class WFRunInfo : RunInfo {
     override var id = 0
     override var isJudged = false
     override var result = ""
-    var languageId = 0
+    var languageId: Int? = 0
     override var problemId = 0
     var passedTestsNumber = 0
     var totalTestsNumber = 0
