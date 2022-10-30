@@ -109,6 +109,9 @@ fun Application.module() {
             route("/admin") { configureAdminApiRouting() }
             route("/overlay") { configureOverlayRouting() }
         }
+        route("/smartsvg"){
+            configureSmartSvgRouting(config.mediaDirectory)
+        }
     }
     val handler = CoroutineExceptionHandler { coroutineContext, throwable ->
         environment.log.error("Uncaught exception in coroutine context $coroutineContext", throwable)

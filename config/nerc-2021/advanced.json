@@ -13,13 +13,12 @@
         "name": "bronze",
         "count": 4
       }
-    ],
-    "showTeamsWithoutSubmissions": false
+    ]
   },
   "teamMediaTemplate": {
-    "screen": {
-      "type": "Video",
-      "url": "http://localhost:9090"
+    "achievement": {
+      "type": "Photo",
+      "url": "http://localhost:8080/smartsvg/achivements.svg?teamId={teamId}"
     }
   },
   "teamOverrides": {
@@ -141,7 +140,8 @@
       "shortname": "AUCA: dishmans"
     },
     "667602": {
-      "shortname": "HSE: trained+Overpressured"
+      "shortname": "HSE: trained+Overpressured",
+      "info": "Safonov | Gorokhovskii | Fedoseev"
     },
     "667603": {
       "shortname": "MIPT: Log-rank conjecture"

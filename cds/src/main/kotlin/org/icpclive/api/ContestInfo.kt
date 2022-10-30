@@ -124,6 +124,7 @@ data class TeamInfo(
     val groups: List<String>,
     val hashTag: String?,
     val medias: Map<TeamMediaType, MediaType>,
+    val info: String? = null,
     val isHidden: Boolean = false,
 )
 

@@ -82,7 +82,11 @@ class AdvancedPropertiesAdapter(
         }
     }
 
-    private fun applyOverrides(info: ContestInfo, overrides: AdvancedProperties, submittedTeams: Set<Int>) : ContestInfo {
+    private fun applyOverrides(
+        info: ContestInfo,
+        overrides: AdvancedProperties,
+        submittedTeams: Set<Int>
+    ): ContestInfo {
         val (teamInfos, unusedTeamOverrides) = mergeOverride(
             info.teams,
             overrides.teamOverrides,
@@ -105,7 +109,8 @@ class AdvancedPropertiesAdapter(
                 if (override.medias != null)
                     (team.medias + override.medias).filterValues { it != null }.mapValues { it.value!! }
                 else
-                    team.medias
+                    team.medias,
+                override.info ?: team.info,
             )
         }
         val (problemInfos, unusedProblemOverrides) = mergeOverride(
@@ -130,7 +135,8 @@ class AdvancedPropertiesAdapter(
         else
             overrides.holdTimeSeconds?.toIntOrNull()?.seconds ?: info.holdBeforeStartTime
         val medals = overrides.scoreboardOverrides?.medals ?: info.medals
-        val penaltyPerWrongAttempt = overrides.scoreboardOverrides?.penaltyPerWrongAttempt ?: info.penaltyPerWrongAttempt
+        val penaltyPerWrongAttempt =
+            overrides.scoreboardOverrides?.penaltyPerWrongAttempt ?: info.penaltyPerWrongAttempt
         val penaltyRoundingMode = overrides.scoreboardOverrides?.penaltyRoundingMode ?: info.penaltyRoundingMode
         if (unusedTeamOverrides.isNotEmpty()) logger.warn("No team for override: $unusedTeamOverrides")
         if (unusedProblemOverrides.isNotEmpty()) logger.warn("No problem for override: $unusedProblemOverrides")
